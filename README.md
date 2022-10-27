@@ -84,7 +84,7 @@ As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as e
   7.4. Comparação do conteúdo de GC das sequências analisadas com o esperado do genoma de referência
 - [ ] **8. Remoção dos adaptadores e sequências de baixa qualidade através do *[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)***
 
-  8.1. Controle de qualidade através do *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)* e comparação com os dados antes do tratamento com *Trimmomatic*
+  8.1. Controle de qualidade através do *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)* e comparação com os dados anteriores ao tratamento com *Trimmomatic*
 - [ ] **9. Alinhamento com o genoma de referência através do *[STAR](https://github.com/alexdobin/STAR)***
 - [ ] **10. Remoção de duplicatas pelo *[Picard](https://broadinstitute.github.io/picard/)***
 - [ ] **11. Indexação através do *[SAMTools](http://www.htslib.org/)***
