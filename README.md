@@ -34,7 +34,7 @@ The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of
   7.4. GC content analysis compared to the expected in the reference genome
 - [ ] **8. Trimming with *[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)***
 
-  8.1. Quality control through *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)* and comparsion with results before trimming
+  8.1. Quality control through *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)* and comparison with results before trimming
 - [ ] **9. Alignment with reference genome through *[STAR](https://github.com/alexdobin/STAR)***
 - [ ] **10. Duplicates removal through *[Picard](https://broadinstitute.github.io/picard/)***
 - [ ] **11. Indexing through *[SAMTools](http://www.htslib.org/)***
