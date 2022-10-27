@@ -10,7 +10,7 @@ Workflow for complete RNAseq analysis from .gz raw data.
 
 [Repository](https://github.com/capuccino26/RNAseq)
 
-# Workflow
+## Workflow
 The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of bioinformatics steps, which will be automated in the present project using python/R integration. The project is still under development, and the finished steps will be marked down in the following workflow.
 
 - [X] **1. Total RNA Extraction**
@@ -49,3 +49,6 @@ The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of
 <div align="center">
   <img src="https://i.imgur.com/sKLJN2b.png">
 </div>
+
+## Disclaimer
+The data used here as example are not mine, please refer to the proper [guidelines](https://holab-hku.github.io/R-workshop/rna-seq-analysis-in-r.html) from Dr Joshua Ho's at the [Bioinformatics and Digital Health Laboratory](https://holab-hku.github.io/).
