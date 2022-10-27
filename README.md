@@ -11,7 +11,7 @@ Workflow for complete RNAseq analysis from .gz raw data.
 [Repository](https://github.com/capuccino26/RNAseq)
 
 ## Workflow
-The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of bioinformatics steps, which will be automated in the present project using python/R integration. The project is still under development, and the finished steps will be marked down in the following workflow.
+The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of bioinformatics steps, which will be automated in the present project using command line/java/python/R integration. The project is still under development, and the finished steps will be marked down in the following workflow.
 
 - [X] **1. Total RNA Extraction**
 - [X] **2. mRNA isolation**
@@ -52,3 +52,53 @@ The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of
 
 ## Disclaimer
 The data used here as example are not mine, please refer to the proper [guidelines](https://holab-hku.github.io/R-workshop/rna-seq-analysis-in-r.html) from Dr Joshua Ho's at the [Bioinformatics and Digital Health Laboratory](https://holab-hku.github.io/).
+
+
+# PT-BR
+## Sobre
+Fluxo de trabalho da análise completa de RNAseq com dados brutos no formato .gz.
+
+[Repositório](https://github.com/capuccino26/RNAseq)
+
+## Fluxo de trabalho
+As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as etapas 7 a 14 consistem de etapas de bioinformática, que serão automatizada no presente projeto através da integração de linha de comando/java/python/R. O projeto ainda está em desenvolvimento, de forma que as etapas finalizadas serão marcadas no seguinte fluxo de trabalho.
+
+- [X] **1. Extração de RNA total**
+- [X] **2. Isolamento de mRNA**
+
+  2.1. Análise de degradação por *Northern Blotting*
+- [X] **3. Fragmentação**
+- [X] **4. Conversão em biblioteca de cDNA**
+- [X] **5. Adição dos adaptadores**
+- [X] **6. Amplificação por PCR**
+
+  6.1. Controle de qualidade dos produtos de PCR quanto à concentração e tamanho dos fragmentos
+- [ ] **7. Sequenciamento**
+
+  7.1. Resultados no formato FASTQ compactados como .gz
+
+  7.2. Controle de qualidade através do *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)*
+
+  7.3. Análise de contaminação pela comparação com genomas de referência comuns através do BLAST, BWA e kraken2
+
+  7.4. Comparação do conteúdo de GC das sequências analisadas com o esperado do genoma de referência
+- [ ] **8. Remoção dos adaptadores e sequências de baixa qualidade através do *[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)***
+
+  8.1. Controle de qualidade através do *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)* e comparação com os dados antes do tratamento com *Trimmomatic*
+- [ ] **9. Alinhamento com o genoma de referência através do *[STAR](https://github.com/alexdobin/STAR)***
+- [ ] **10. Remoção de duplicatas pelo *[Picard](https://broadinstitute.github.io/picard/)***
+- [ ] **11. Indexação através do *[SAMTools](http://www.htslib.org/)***
+- [ ] **12. Contagem de associações positivas através do *[FeatureCounts](http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html)***
+
+  12.1. Análise de cobertura
+
+  12.2. Normalização por *Reads* por Kilobase por Milhão de *Reads* Mapeados (*reads per kilobase per million of reads mapped - RPKM*) através do *[gatk](https://github.com/broadinstitute/gatk/releases)*
+- [ ] **13. Quantificação pelo *[BedTools](https://github.com/arq5x/bedtools2)***
+- [X] **14. Análise de expressão diferencial através do *[DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)***
+
+<div align="center">
+  <img src="https://i.imgur.com/Ygr3F67.png">
+</div>
+
+## Aviso
+Os dados aqui utilizados não são de minha autoria, refira-se às [diretrizes adequadas](https://holab-hku.github.io/R-workshop/rna-seq-analysis-in-r.html) do Dr Joshua Ho no [*Bioinformatics and Digital Health Laboratory*](https://holab-hku.github.io/).
