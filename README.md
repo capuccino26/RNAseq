@@ -101,4 +101,4 @@ As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as e
 </div>
 
 ## Aviso
-Os dados aqui utilizados não são de minha autoria, refira-se às [diretrizes adequadas](https://holab-hku.github.io/R-workshop/rna-seq-analysis-in-r.html) do Dr Joshua Ho no [*Bioinformatics and Digital Health Laboratory*](https://holab-hku.github.io/).
+Os dados aqui utilizados como exemplo não são de minha autoria, refira-se às [diretrizes adequadas](https://holab-hku.github.io/R-workshop/rna-seq-analysis-in-r.html) do Dr Joshua Ho no [*Bioinformatics and Digital Health Laboratory*](https://holab-hku.github.io/).
