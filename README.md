@@ -44,6 +44,9 @@ The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of
 
   12.2. Normalization for RPKM (reads per kilobase per million of reads mapped) through *[gatk](https://github.com/broadinstitute/gatk/releases)*
 - [ ] **13. Quantification through *[BedTools](https://github.com/arq5x/bedtools2)***
+
+  The RAW data is used for quantification, not the normalized through RPKM, which is used for statistical purposes only.
+  
 - [X] **14. Differential expression analysis through *[DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)***
 
 <div align="center">
@@ -94,6 +97,9 @@ As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as e
 
   12.2. Normalização por *Reads* por Kilobase por Milhão de *Reads* Mapeados (*reads per kilobase per million of reads mapped - RPKM*) através do *[gatk](https://github.com/broadinstitute/gatk/releases)*
 - [ ] **13. Quantificação pelo *[BedTools](https://github.com/arq5x/bedtools2)***
+
+  Os dados brutos são utilizados na quantificação, não os dados normalizados por RPKM, que são utilizados apenas para finalidades estatísticas.
+  
 - [X] **14. Análise de expressão diferencial através do *[DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)***
 
 <div align="center">
