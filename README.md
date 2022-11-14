@@ -11,7 +11,7 @@ Workflow for complete RNAseq analysis from .gz raw data.
 [Repository](https://github.com/capuccino26/RNAseq)
 
 ## Workflow
-The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of bioinformatics steps, which will be automated in the present project using command line/java/python/R integration. The project is still under development, and the finished steps will be marked down in the following workflow.
+The steps 1 to 7 consists of wet lab procedures, while steps 7 to 13 consists of bioinformatics steps, which will be automated in the present project using command line/java/python/R integration. The project is still under development, and the finished steps will be marked down in the following workflow.
 
 - [X] **1. Total RNA Extraction**
 - [X] **2. mRNA isolation**
@@ -61,7 +61,7 @@ Fluxo de trabalho da análise completa de RNAseq com dados brutos no formato .gz
 [Repositório](https://github.com/capuccino26/RNAseq)
 
 ## Fluxo de trabalho
-As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as etapas 7 a 14 consistem de etapas de bioinformática, que serão automatizada no presente projeto através da integração de linha de comando/java/python/R. O projeto ainda está em desenvolvimento, de forma que as etapas finalizadas serão marcadas no seguinte fluxo de trabalho.
+As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as etapas 7 a 13 consistem de etapas de bioinformática, que serão automatizada no presente projeto através da integração de linha de comando/java/python/R. O projeto ainda está em desenvolvimento, de forma que as etapas finalizadas serão marcadas no seguinte fluxo de trabalho.
 
 - [X] **1. Extração de RNA total**
 - [X] **2. Isolamento de mRNA**
