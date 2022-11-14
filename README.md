@@ -32,13 +32,13 @@ The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of
   7.3. Contamination analysis through comparison of common reference genomes through BLAST, BWA and kraken2
 
   7.4. GC content analysis compared to the expected in the reference genome
-- [ ] **8. Trimming with *[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)***
+- [X] **8. Trimming with *[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)***
 
   8.1. Quality control through *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)* and comparison with results before trimming
-- [ ] **9. Alignment with reference genome through *[STAR](https://github.com/alexdobin/STAR)***
-- [ ] **10. Duplicates removal through *[Picard](https://broadinstitute.github.io/picard/)***
-- [ ] **11. Indexing through *[SAMTools](http://www.htslib.org/)***
-- [ ] **12. Hits counting through *[FeatureCounts](http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html)***
+- [X] **9. Alignment with reference genome through *[STAR](https://github.com/alexdobin/STAR)***
+- [X] **10. Duplicates removal through *[Picard](https://broadinstitute.github.io/picard/)***
+- [X] **11. Indexing through *[SAMTools](http://www.htslib.org/)***
+- [X] **12. Hits counting through *[FeatureCounts](http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html)***
 
   12.1. Coverage analysis
 
@@ -82,13 +82,13 @@ As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as e
   7.3. Análise de contaminação pela comparação com genomas de referência comuns através do BLAST, BWA e kraken2
 
   7.4. Comparação do conteúdo de GC das sequências analisadas com o esperado do genoma de referência
-- [ ] **8. Remoção dos adaptadores e sequências de baixa qualidade através do *[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)***
+- [X] **8. Remoção dos adaptadores e sequências de baixa qualidade através do *[Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)***
 
   8.1. Controle de qualidade através do *[FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)* e comparação com os dados anteriores ao tratamento com *Trimmomatic*
-- [ ] **9. Alinhamento com o genoma de referência através do *[STAR](https://github.com/alexdobin/STAR)***
-- [ ] **10. Remoção de duplicatas pelo *[Picard](https://broadinstitute.github.io/picard/)***
-- [ ] **11. Indexação através do *[SAMTools](http://www.htslib.org/)***
-- [ ] **12. Contagem de associações positivas através do *[FeatureCounts](http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html)***
+- [X] **9. Alinhamento com o genoma de referência através do *[STAR](https://github.com/alexdobin/STAR)***
+- [X] **10. Remoção de duplicatas pelo *[Picard](https://broadinstitute.github.io/picard/)***
+- [X] **11. Indexação através do *[SAMTools](http://www.htslib.org/)***
+- [X] **12. Contagem de associações positivas através do *[FeatureCounts](http://www.bioconductor.org/packages/release/bioc/html/Rsubread.html)***
 
   12.1. Análise de cobertura
 
