@@ -47,7 +47,7 @@ The steps 1 to 7 consists of wet lab procedures, while steps 7 to 14 consists of
 - [X] **13. Differential expression analysis through *[DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)***
 
 <div align="center">
-  <img src="https://i.imgur.com/sKLJN2b.png">
+  <img src="https://i.imgur.com/UGuCNlo.png">
 </div>
 
 ## Disclaimer
@@ -97,7 +97,7 @@ As etapas 1 a 7 consistem de técnicas de análises laboratoriais, enquanto as e
 - [X] **13. Análise de expressão diferencial através do *[DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)***
 
 <div align="center">
-  <img src="https://i.imgur.com/Ygr3F67.png">
+  <img src="https://i.imgur.com/R5h2CIs.png">
 </div>
 
 ## Aviso
