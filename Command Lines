@@ -1,0 +1,156 @@
+########################################################################
+#########################-SOFTWARE_INSTALLATION-########################
+########################################################################
+sudo apt install git
+sudo apt install ant
+
+##Trimmomatic
+git clone https://github.com/usadellab/Trimmomatic.git
+cd Trimmomatic
+ant
+###Execute trimmomatic
+java -jar /usr/share/java/trimmomatic-0.36.jar
+
+##STAR
+git clone https://github.com/alexdobin/STAR.git
+cd STAR/source
+make
+###Execute STAR
+/STAR/source/STAR
+
+##PICARD
+git clone https://github.com/broadinstitute/picard.git
+cd picard
+./gradlew shadowJar
+###Execute picard
+java -Xmx4g -jar /picard/build/libs/picard.jar
+
+##HTSlib/samtools/bcftools
+sudo apt install autoconf
+###HTSlib
+git clone https://github.com/samtools/htslib.git
+cd htslib
+git submodule update --init --recursive
+autoreconf -i
+./configure
+make
+###samtools
+apt install samtools
+####alternativamente
+git clone https://github.com/samtools/samtools.git
+cd samtools
+autoheader
+autoconf -Wno-syntax
+./configure
+make
+###bcftools
+git clone https://github.com/samtools/bcftools.git
+cd bcftools
+autoheader
+autoconf -Wno-syntax
+./configure
+make
+
+##GATK
+wget https://github.com/broadinstitute/gatk/releases/download/4.2.6.1/gatk-4.2.6.1.zip
+unzip gatk-4.2.6.1.zip
+
+##SRA
+wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/3.0.0/sratoolkit.3.0.0-centos_linux64-cloud.tar.gz
+###Execute
+./sratoolkit/sratoolkit.3.0.0-centos_linux64-cloud/usr/local/ncbi/sra-tools/bin/vdb-config --interactive
+
+##IGV
+wget https://data.broadinstitute.org/igv/projects/downloads/2.15/IGV_Linux_2.15.2_WithJava.zip
+unzip IGV_Linux_2.15.2_WithJava.zip
+###Execute
+cd /IGV_Linux_2.15.2_WithJava/IGV_Linux_2.15.2
+./igv.sh
+
+##BedTools
+apt-get install bedtools
+
+
+########################################################################
+###############################-EXECUTE-################################
+########################################################################
+#Fastqc
+fastqc /Scripts/DADOS_2/ERR/ERR1474664_1.fastq.gz --threads 1
+fastqc /Scripts/DADOS_2/ERR/ERR1474664_2.fastq.gz --threads 1
+
+#Trimmomatic
+java -jar /usr/share/java/trimmomatic-0.36.jar PE -threads 4 /Scripts/DADOS_2/ERR/ERR1474664_1.fastq.gz /Scripts/DADOS_2/ERR/ERR1474664_2.fastq.gz -baseout /_trim.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+## O comando "-baseout" define o prefixo do arquivo output
+
+#Fastqc pos
+fastqc /Scripts/DADOS_2/ERR/_trim_1P.fq.gz
+fastqc /Scripts/DADOS_2/ERR/_trim_2P.fq.gz
+fastqc /Scripts/DADOS_2/ERR/_trim_1U.fq.gz
+fastqc /Scripts/DADOS_2/ERR/_trim_2U.fq.gz
+
+#STAR Index
+/STAR/source/STAR --runThreadN 6 --runMode genomeGenerate --genomeDir /Scripts/DADOS_2/CELEGANS_INDEX --genomeFastaFiles /Scripts/DADOS_2/Caenorhabditis_elegans.WBcel235.dna.toplevel
+
+##Optional: Index through Picard
+java -Xmx4g -jar /picard/build/libs/picard.jar CreateSequenceDictionary -R /Scripts/DADOS_2/Caenorhabditis_elegans.WBcel235.dna.toplevel.fa.gz
+
+#STAR Align
+/STAR/source/STAR --runThreadN {threads} --genomeDir starIndex --genomeLoad LoadAndKeep --readFilesIn {input.read1} {input.read2} --outFilterIntronMotifs RemoveNoncanonical --outFileName {params.prefix} --outSAMtype BAM SortedByCoordinate --limitBAMsortRAM 5000000000 --outReadsUnmapped Fastx
+/STAR/source/STAR --runThreadN 1 --genomeDir /Scripts/DADOS_2/CELEGANS_INDEX --genomeLoad LoadAndKeep --readFilesIn /Scripts/DADOS_2/ERR/_trim_1P /Scripts/DADOS_2/ERR/_trim_2P --outFilterIntronMotifs RemoveNoncanonical --outSAMtype BAM SortedByCoordinate --limitBAMsortRAM 5000000000 --outReadsUnmapped Fastx
+
+#SAMTOOLS index
+./samtools/samtools index /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam
+./samtools/samtools flagstats /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam
+./samtools/samtools coverage /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam
+
+#Remove duplicate reads using picard tools
+java -Xmx4g -jar /picard/build/libs/picard.jar MarkDuplicates --REMOVE_DUPLICATES true -I /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam -O /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord_picard.out.bam -M /Scripts/DADOS_2/STAR_OUT/metrics.txt
+
+#SAMTOOLS index after picard
+./samtools/samtools index /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord_picard.out.bam
+
+
+########################################################################
+###################################_R_##################################
+########################################################################
+##################
+###INSTALLATION###
+#Add source to the sources.list:
+##Open:
+/etc/apt/sources.list
+##Add:
+deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/
+#Add key:
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+#Dependencies:
+sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+#Installation
+sudo apt update
+sudo apt install r-base
+sudo apt install r-base-dev
+##Libraries
+sudo apt install libcurl4-openssl-dev libssl-dev libxml2-dev
+
+##################
+#####PACKAGES#####
+install.packages("tidyverse","Biobase","gplots","ggplot2","RColorBrewer","pheatmap","matrixStats","lattice","gtools","dplyr","BiocManager","seqinr")
+BiocManager::install("tximportData")
+BiocManager::install("tximport")
+BiocManager::install("DESeq2")
+BiocManager::install("vsn")
+BiocManager::install("GenomicFeatures")
+BiocManager::install("preprocessCore")
+BiocManager::install("Rsubread")
+BiocManager::install("ShortRead")
+
+##################
+#Read Fasta:
+library("seqinr")
+fasta <- read.fasta(file = "ARQUIVO.fasta")
+
+#Read FASTQ
+library("ShortRead")
+read <- readFastq("FILE.fastq.gz")
+sread(read)
+id(read)
+quality(read)
