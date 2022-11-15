@@ -16,7 +16,7 @@ rule rawFastqc:
         rawread="rawReads/{sra}_{frr}.fastq"
     output:
         zip="rawQC/{sra}_{frr}_fastqc.zip",
-		html="rawQC/{sra}_{frr}_fastqc.html"
+	html="rawQC/{sra}_{frr}_fastqc.html"
     threads:
         1
 	params:
