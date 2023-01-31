@@ -38,7 +38,8 @@ df <- as.data.frame(colData(dds)[,c("Status","CellType")])
 pheatmap(assay(ntd)[select,], cluster_rows=FALSE, show_rownames=FALSE,cluster_cols=FALSE, annotation_col=df)
 ##Pheatmap corrected
 data <- read.csv2("/GSE60450_LactationGenewiseCounts.csv",sep=';',header=TRUE,row.names="EntrezGeneID")
-data_subset <- as.matrix(data[rowSums(data)>5000,])
+data <- subset(data,select=-c(Length))
+data_subset <- as.matrix(data[rowSums(data)>1000000,])
 ##Outliers counting
 W <- res$stat
 maxCooks <- apply(assays(dds)[["cooks"]],1,max)
