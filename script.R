@@ -54,6 +54,7 @@ m <- ncol(dds)
 p <- 3
 abline(h=qf(.99, p, m - p))
 ##PCA
+library("vsn")
 vsd <- vst(dds, blind=FALSE)
 plotPCA(vsd, intgroup=c("Status", "CellType"))
 ##Close file for data
