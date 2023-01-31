@@ -32,10 +32,13 @@ plotCounts(dds, gene=which.min(res$padj), intgroup="Status")
 ##ggplot2
 d <- plotCounts(dds, gene=which.min(res$padj), intgroup="Status",returnData=TRUE)
 ggplot(d, aes(x=Status, y=count)) + geom_point(position=position_jitter(w=0.1,h=0)) + scale_y_log10(breaks=c(25,100,400))
-##Heatmap
+##Heatmap obsolete
 select <- order(rowMeans(counts(dds,normalized=TRUE)),decreasing=TRUE)[1:20]
 df <- as.data.frame(colData(dds)[,c("Status","CellType")])
 pheatmap(assay(ntd)[select,], cluster_rows=FALSE, show_rownames=FALSE,cluster_cols=FALSE, annotation_col=df)
+##Pheatmap corrected
+data <- read.csv2("/GSE60450_LactationGenewiseCounts.csv",sep=';',header=TRUE,row.names="EntrezGeneID")
+data_subset <- as.matrix(data[rowSums(data)>5000,])
 ##Outliers counting
 W <- res$stat
 maxCooks <- apply(assays(dds)[["cooks"]],1,max)
