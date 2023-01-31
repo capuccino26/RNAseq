@@ -40,6 +40,11 @@ pheatmap(assay(ntd)[select,], cluster_rows=FALSE, show_rownames=FALSE,cluster_co
 data <- read.csv2("/GSE60450_LactationGenewiseCounts.csv",sep=';',header=TRUE,row.names="EntrezGeneID")
 data <- subset(data,select=-c(Length))
 data_subset <- as.matrix(data[rowSums(data)>1000000,])
+##DENDROGRAM
+###install.packages("dendextend")
+###library(dendextend)
+my_hclust_gene <- hclust(dist(data_subset), method = "complete")
+as.dendrogram(my_hclust_gene) %>% plot(horiz = TRUE)
 ##Outliers counting
 W <- res$stat
 maxCooks <- apply(assays(dds)[["cooks"]],1,max)
