@@ -57,5 +57,60 @@ abline(h=qf(.99, p, m - p))
 library("vsn")
 vsd <- vst(dds, blind=FALSE)
 plotPCA(vsd, intgroup=c("Status", "CellType"))
+##vioplot
+library("vioplot")
+vioplot(coldata,col=c(rep("orange",3),rep("lightblue",3)),ylab="reads",las=2)
+##dispersion
+plotDispEsts(dds,ylim=c(1e-6,1e2))
+##results histograms
+hist(res$pvalue,breaks=20,col="grey")
+hist(res$padj,breaks=20,col="grey")
+##Shrinking
+###Check the coeficient number using "resultsNames(dds)"
+BiocManager::install("apeglm")
+shrink_res <- lfcShrink(dds,res=res,coef=3)
+
+##Volcano
+###Convert to dataframe
+data<-as.data.frame(res)
+###Plot inicial
+ggplot(data=data,aes(x=log2FoldChange,y=pvalue))+geom_point()
+###Convert p to -10log
+p<-ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue))) + geom_point()
+###Extra formating
+####Theme Minimal
+p2<-p+theme_minimal
+####Vertical Lines for log2FoldChange threshold
+p2<-p2+geom_vline(xintercept=c(-0.6, 0.6), col="red")
+####Horizontal line for p-values
+p2<-p2+geom_hline(yintercept=-log10(0.05), col="red")
+####The significantly differentially expressed genes are the ones found in the upper-left and upper-right corners.
+####Add a column to the data frame to specify if they are UP- or DOWN- regulated (log2FoldChange respectively positive or negative)
+#####Add a column of NAs
+data$diffexpressed <- "NO"
+#####if log2Foldchange > 0.6 and pvalue < 0.05, set as "UP" 
+data$diffexpressed[data$log2FoldChange > 0.6 & data$pvalue < 0.05] <- "UP"
+#####if log2Foldchange < -0.6 and pvalue < 0.05, set as "DOWN"
+data$diffexpressed[data$log2FoldChange < -0.6 & data$pvalue < 0.05] <- "DOWN"
+#####Re-plot but this time color the points with "diffexpressed"
+p <- ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed)) + geom_point() + theme_minimal()
+p2 <- p+geom_vline(xintercept=c(-0.6, 0.6), col="red")+geom_hline(yintercept=-log10(0.05), col="red")
+####Change colors as desired
+p3 <- p2 + scale_color_manual(values=c("blue", "black", "red"))
+####Create a variable for colors:
+mycolors<-c("blue", "black", "red")
+names(mycolors)<-c("DOWN","UP","NO")
+p3 <- p2 + scale_color_manual(values=mycolors)
+####Naming the diff expressed genes:
+#####Need the EntrezGeneID from the raw data:
+dataraw<-read.csv2("/GSE60450_LactationGenewiseCounts.csv")
+data$datalabel <- NA
+data$datalabel[data$diffexpressed != "NO"] <- dataraw$EntrezGeneID[data$diffexpressed != "NO"]
+ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, label=datalabel)) + geom_point() + theme_minimal() + geom_text()
+####Organize the labels using the "ggrepel" package and the geom_text_repel() function
+library(ggrepel)
+####Plot adding up all layers we have seen so far
+ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, label=datalabel)) + geom_point() + theme_minimal() + geom_text_repel() + scale_color_manual(values=c("blue", "black", "red")) + geom_vline(xintercept=c(-0.6, 0.6), col="red") + geom_hline(yintercept=-log10(0.05), col="red")
+
 ##Close file for data
 dev.off()
