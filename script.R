@@ -79,7 +79,7 @@ ggplot(data=data,aes(x=log2FoldChange,y=pvalue))+geom_point()
 p<-ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue))) + geom_point()
 ###Extra formating
 ####Theme Minimal
-p2<-p+theme_minimal
+p2<-p+theme_minimal()
 ####Vertical Lines for log2FoldChange threshold
 p2<-p2+geom_vline(xintercept=c(-0.6, 0.6), col="red")
 ####Horizontal line for p-values
