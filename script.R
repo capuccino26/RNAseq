@@ -17,6 +17,12 @@ dds <- DESeqDataSetFromMatrix(countData = coldatab,colData = sampleinfo,design =
 dds <- DESeq(dds)
 res <- results(dds)
 
+#Merge table res/entrezID
+resb<-results(dds,tidy=TRUE)
+dataid<-subset(coldata,select="EntrezGeneID") #For lactation Data
+m<-merge(resb,dataid)
+
+
 #Exporting Results
 write.table(as.data.frame(res), file="/starAligned/treated/RES_deseq.csv")
 #print(res)
