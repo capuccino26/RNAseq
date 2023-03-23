@@ -20,6 +20,7 @@ res <- results(dds)
 #Merge table res/entrezID
 resb<-results(dds,tidy=TRUE)
 dataid<-subset(coldata,select="EntrezGeneID") #For lactation Data
+names(dataid)<-("row")
 dataid<-merge(resb,dataid)
 colnames(dataid)[1]<-"EntrezGeneID"
 
