@@ -24,6 +24,11 @@ res <- results(dds)
 ##dataid<-merge(resb,dataid)
 ##colnames(dataid)[1]<-"EntrezGeneID"
 
+#Merge table res/EntrezID
+ids<-subset(coldata,select="EntrezGeneID")
+data<-as.data.frame(res)
+dataid<-cbind(ids,data)
+
 #Exporting Results
 write.table(as.data.frame(res), file="/starAligned/treated/RES_deseq.csv")
 #print(res)
