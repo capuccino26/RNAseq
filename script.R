@@ -125,5 +125,18 @@ library(ggrepel)
 ####Plot adding up all layers we have seen so far
 ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, label=datalabel)) + geom_point() + theme_minimal() + geom_text_repel() + scale_color_manual(values=c("blue", "black", "red")) + geom_vline(xintercept=c(-0.6, 0.6), col="red") + geom_hline(yintercept=-log10(0.05), col="red")
 
+#Simple comparative heatmap
+sampleDists <- dist(t(assay(vsd)))
+sampleDistMatrixB <- as.matrix(sampleDists)
+pheatmap(sampleDistMatrixB, clustering_distance_rows = sampleDists, clustering_distance_cols = sampleDists, col = colors)
+
+#Comparative heatmap
+library("genefilter")
+topVarGenes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 20)
+mat  <- assay(vsd)[ topVarGenes, ]
+mat  <- mat - rowMeans(mat)
+anno <- as.data.frame(colData(vsd)[, c("CellType","Status")])
+pheatmap(mat, annotation_col = anno)
+
 ##Close file for data
 dev.off()
