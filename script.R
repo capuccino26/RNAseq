@@ -44,7 +44,7 @@ plotCounts(dds, gene=which.min(res$padj), intgroup="Status")
 ##ggplot2
 d <- plotCounts(dds, gene=which.min(res$padj), intgroup="Status",returnData=TRUE)
 ggplot(d, aes(x=Status, y=count)) + geom_point(position=position_jitter(w=0.1,h=0)) + scale_y_log10(breaks=c(25,100,400))
-##Heatmap obsolete
+##Heatmap DESeq2
 select <- order(rowMeans(counts(dds,normalized=TRUE)),decreasing=TRUE)[1:20]
 df <- as.data.frame(colData(dds)[,c("Status","CellType")])
 ntd <- normTransform(dds)
