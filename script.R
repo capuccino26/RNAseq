@@ -140,3 +140,16 @@ pheatmap(mat, annotation_col = anno)
 
 ##Close file for data
 dev.off()
+
+#Annotation
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("AnnotationDbi")
+BiocManager::install("ReportingTools")
+ens.str <- substr(rownames(datab), 1, 15)
+datab$datalabel <- mapIds(org.Hs.eg.db, keys=ens.str, column="ENTREZID", keytype="ENTREZID", multiVals="first")
+resOrdered <- datab[order(datab$pvalue),]
+htmlRep <- HTMLReport(shortName="report", title="My report",reportDirectory="./report")
+publish(resOrderedDF, htmlRep)
+url <- finish(htmlRep)
+browseURL(url)
+
