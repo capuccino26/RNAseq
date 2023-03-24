@@ -47,6 +47,7 @@ ggplot(d, aes(x=Status, y=count)) + geom_point(position=position_jitter(w=0.1,h=
 ##Heatmap obsolete
 select <- order(rowMeans(counts(dds,normalized=TRUE)),decreasing=TRUE)[1:20]
 df <- as.data.frame(colData(dds)[,c("Status","CellType")])
+ntd <- normTransform(dds)
 pheatmap(assay(ntd)[select,], cluster_rows=FALSE, show_rownames=FALSE,cluster_cols=FALSE, annotation_col=df)
 ##Pheatmap corrected
 data <- read.csv2("/GSE60450_LactationGenewiseCounts.csv",sep=';',header=TRUE,row.names="EntrezGeneID")
