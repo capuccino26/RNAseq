@@ -9,8 +9,10 @@ library("pheatmap")
 
 #Settings for DESeq2
 sampleinfo <- read.table(file.path("/starAligned/SampleInfo.txt"), header=TRUE)
-coldata <- read.csv2("/starAligned/counts.csv")
-coldatab <- subset(coldata,select=-c(EntrezGeneID,Length))
+coldata <- read.csv2("/starAligned/counts.csv",row.names=1)
+##The flag "row.names=1" keep the gene names
+#coldatab <- subset(coldata,select=-c(EntrezGeneID,Length))
+coldatab <- subset(coldata,select=-c(Length))
 
 #DESeq2 Execution
 dds <- DESeqDataSetFromMatrix(countData = coldatab,colData = sampleinfo,design = ~ Status)
@@ -24,7 +26,7 @@ res <- results(dds)
 ##dataid<-merge(resb,dataid)
 ##colnames(dataid)[1]<-"EntrezGeneID"
 
-#Merge table res/EntrezID
+#Merge table res/EntrezID (Obsolete - use the flag "row.names=1" in coldata to keep the genes names)
 ids<-subset(coldata,select="EntrezGeneID")
 data<-as.data.frame(res)
 dataid<-cbind(ids,data)
