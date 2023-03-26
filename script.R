@@ -27,13 +27,41 @@ res <- results(dds)
 ##colnames(dataid)[1]<-"EntrezGeneID"
 
 #Merge table res/EntrezID (Obsolete - use the flag "row.names=1" in coldata to keep the genes names)
-ids<-subset(coldata,select="EntrezGeneID")
-data<-as.data.frame(res)
-dataid<-cbind(ids,data)
+##ids<-subset(coldata,select="EntrezGeneID")
+##data<-as.data.frame(res)
+##dataid<-cbind(ids,data)
 
 #Exporting Results
 write.table(as.data.frame(res), file="/starAligned/treated/RES_deseq.csv")
 #print(res)
+
+#Normalization
+##Remove all reads <=10
+teste_keep<-rowSums(counts(teste_dds))>=10
+teste_ddsnorm<-teste_dds[teste_keep,]
+teste_ddsnormb<-DESeq(teste_ddsnorm)
+teste_resnorm <- results(teste_ddsnormb)
+##Normalization for library size
+teste_resnormLS<-counts(teste_ddsnormb,normalize=T)
+teste_resnormLSb <- results(teste_ddsnormb, alpha=0.05)
+###Alpha determines which p value is the cutoff
+###LFC in the results are LogFoldChange, indicating up (LFC>0) and downregulated (LFC<0) genes
+###Order the results for the p adjusted
+teste_resnormLSbordered<-teste_resnormLSb[order(teste_resnormLSb$padj),]
+###Select only significant DE (p>0.05)
+teste_signDE<-subset(teste_resnormLSb,padj<=0.05)
+###Merge the signDE subset with the Counts dataset
+####SUBSET WITHOUT NORMALIZATION
+#teste_signDEDF<-as.data.frame(teste_signDE)
+#teste_merged<-merge(teste_count,teste_signDEDF,by=0)
+####SUBSET WITH NORMALIZATION
+teste_mergedNM<-merge(teste_resnormLS,teste_signDEDF,by=0)
+####Pheatmap with normalized data (select only the columns with the normalized count datas)
+teste_pheat<-teste_mergedNM[,2:13]
+row.names(teste_pheat)<-teste_mergedNM$Row.names
+pheatmap(log2(teste_pheat+1),scale="row",show_rownames = F,treeheight_row = 0,treeheight_col = 0)
+#####FLAGS: "scale" compares each row with each other, "show_rownames=F" removes the row names, "treeheight=0" removes the phylogeny analysis.
+#####The normalization "log2(teste_pheat+1)" is used to better visualization of the data compared to the raw "teste_pheat" data.
 
 #Graphs
 ##Create file for data
