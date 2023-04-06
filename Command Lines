@@ -128,6 +128,11 @@ java -Xmx4g -jar /picard/build/libs/picard.jar CreateSequenceDictionary -R /Scri
 /STAR/source/STAR --runThreadN 1 --genomeDir /Scripts/DADOS_2/CELEGANS_INDEX --genomeLoad LoadAndKeep --readFilesIn /Scripts/DADOS_2/ERR/_trim_1P /Scripts/DADOS_2/ERR/_trim_2P --outFilterIntronMotifs RemoveNoncanonical --outSAMtype BAM SortedByCoordinate --limitBAMsortRAM 5000000000 --outReadsUnmapped Fastx
 ##With annotation:
 STAR --runThreadN 1 --genomeDir /Scripts/DADOS_2/CELEGANS_INDEX --readFilesIn /Scripts/DADOS_2/ERR/_trim_1P --outSAMtype BAM SortedByCoordinate --quantMode GeneCounts
+##Alternative flags:
+###GFF3 annotation:
+--sjdbGTFtagExonParentTranscript /path
+###Change directory:
+--outFileNamePrefix /path/to/output/dir/prefix
 
 #SAMTOOLS index
 ./samtools/samtools index /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam
