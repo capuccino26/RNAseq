@@ -89,6 +89,11 @@ cd /IGV_Linux_2.15.2_WithJava/IGV_Linux_2.15.2
 ##BedTools
 apt-get install bedtools
 
+#gffread
+##Convert gff files to gtf (ANNOTATION)
+sudo apt install gffread
+
+
 
 ########################################################################
 ###############################-EXECUTE-################################
@@ -106,6 +111,9 @@ fastqc /Scripts/DADOS_2/ERR/_trim_1P.fq.gz
 fastqc /Scripts/DADOS_2/ERR/_trim_2P.fq.gz
 fastqc /Scripts/DADOS_2/ERR/_trim_1U.fq.gz
 fastqc /Scripts/DADOS_2/ERR/_trim_2U.fq.gz
+
+#gffread (ANNOTATION CONVERSION - IF NECESSARY)
+gffread CTBE_SP803280_genome_annotation.EVM19022016.gff3 -T -o CTBE_SP803280.gtf
 
 #STAR Index
 /STAR/source/STAR --runThreadN 6 --runMode genomeGenerate --genomeDir /Scripts/DADOS_2/CELEGANS_INDEX --genomeFastaFiles /Scripts/DADOS_2/Caenorhabditis_elegans.WBcel235.dna.toplevel
