@@ -124,6 +124,7 @@ gffread CTBE_SP803280_genome_annotation.EVM19022016.gff3 -T -o CTBE_SP803280.gtf
 ##Reducing RAM usage:
 ###If you are using a genome with a large > 5,000 number of references (chrosomes/scaffolds), you may need to reduce the --genomeChrBinNbits to reduce RAM consumption. The following scaling is recommended: --genomeChrBinNbits = min(18, log2(GenomeLength/NumberOfReferences)). For example, for 3~gigaBase genome with 100,000 chromosomes/scaffolds, this is equal to 15.
 ###Reducing the number of Threads reduces the RAM usage
+###Using annotation increases the RAM usage
 
 ##Optional: Index through Picard
 java -Xmx4g -jar /picard/build/libs/picard.jar CreateSequenceDictionary -R /Scripts/DADOS_2/Caenorhabditis_elegans.WBcel235.dna.toplevel.fa.gz
