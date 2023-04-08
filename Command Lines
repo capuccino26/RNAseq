@@ -118,6 +118,8 @@ gffread CTBE_SP803280_genome_annotation.EVM19022016.gff3 -T -o CTBE_SP803280.gtf
 #STAR Index
 /STAR/source/STAR --runThreadN 6 --runMode genomeGenerate --genomeDir /Scripts/DADOS_2/CELEGANS_INDEX --genomeFastaFiles /Scripts/DADOS_2/Caenorhabditis_elegans.WBcel235.dna.toplevel
 ##Flag "--sjdbGTFfile annotation.gtf" provides annotation to mapping when available
+##Flag "--sjdbGTFtagExonParentTranscript annotation.gff" provides annotation from gff file
+##Flag "--limitGenomeGenerateRAM 10000000000" limits the RAM used for 10gb, default is 11gb.
 ##For the command "--quantMode GeneCounts" in the alignment process the annotation is necessary
 
 ##Optional: Index through Picard
