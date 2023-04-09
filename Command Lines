@@ -120,6 +120,7 @@ gffread CTBE_SP803280_genome_annotation.EVM19022016.gff3 -T -o CTBE_SP803280.gtf
 ##Flag "--sjdbGTFfile annotation.gtf" provides annotation to mapping when available
 ##Flag "--sjdbGTFtagExonParentTranscript annotation.gff" provides annotation from gff file
 ##Flag "--limitGenomeGenerateRAM 10000000000" limits the RAM used for 10gb, default is 11gb.
+##Flag "--outFilterScoreMinOverLread" and "--outFilterMatchNminOverLread" for controlling the size of the reading filter
 ##For the command "--quantMode GeneCounts" in the alignment process the annotation is necessary
 ##Reducing RAM usage:
 ###If you are using a genome with a large > 5,000 number of references (chrosomes/scaffolds), you may need to reduce the --genomeChrBinNbits to reduce RAM consumption. The following scaling is recommended: --genomeChrBinNbits = min(18, log2(GenomeLength/NumberOfReferences)). For example, for 3~gigaBase genome with 100,000 chromosomes/scaffolds, this is equal to 15.
