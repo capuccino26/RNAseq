@@ -145,6 +145,8 @@ STAR --runThreadN 1 --genomeDir /Scripts/DADOS_2/CELEGANS_INDEX --readFilesIn /S
 ./samtools/samtools index /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam
 ./samtools/samtools flagstats /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam
 ./samtools/samtools coverage /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam
+##Export samtools as a table
+samtools coverage /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam -o /Scripts/DADOS_2/STAR_OUT/Aligned.csv
 
 #Remove duplicate reads using picard tools
 java -Xmx4g -jar /picard/build/libs/picard.jar MarkDuplicates --REMOVE_DUPLICATES true -I /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord.out.bam -O /Scripts/DADOS_2/STAR_OUT/Aligned.sortedByCoord_picard.out.bam -M /Scripts/DADOS_2/STAR_OUT/metrics.txt
