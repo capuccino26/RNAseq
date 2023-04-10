@@ -7,6 +7,24 @@ library("DESeq2")
 library("ggplot2")
 library("pheatmap")
 
+#Tables from exported Covbases samtools:
+##Read tables
+SP80_3280_1 <- subset(read.csv2("/SP803280_1.csv",sep=""),select=c("X.rname","numreads"))
+SP80_3280_2 <- subset(read.csv2("/SP803280_2.csv",sep=""),select=c("X.rname","numreads"))
+SP80_3280_3 <- subset(read.csv2("/SP803280_3.csv",sep=""),select=c("X.rname","numreads"))
+SP80_3280_4 <- subset(read.csv2("/SP803280_4.csv",sep=""),select=c("X.rname","numreads"))
+##Adapt column names to samplefile:
+colnames(SP80_3280_1)[2]<-"SRR21656241"
+colnames(SP80_3280_2)[2]<-"SRR21656242"
+colnames(SP80_3280_3)[2]<-"SRR21656243"
+colnames(SP80_3280_4)[2]<-"SRR21656244"
+##Merge tables:
+coldata<-merge(SP80_3280_1,SP80_3280_2,by="X.rname")
+coldata<-merge(coldata,SP80_3280_3,by="X.rname")
+coldata<-merge(coldata,SP80_3280_4,by="X.rname")
+rownames(coldata) <- coldata$X.rname
+coldata<-subset(coldata,select=-c(X.rname))
+
 #Settings for DESeq2
 sampleinfo <- read.table(file.path("/starAligned/SampleInfo.txt"), header=TRUE)
 coldata <- read.csv2("/starAligned/counts.csv",row.names=1)
