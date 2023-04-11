@@ -196,7 +196,7 @@ p + theme(plot.margin = unit(c(1, 0, 1, 0), "cm"))
 #Simple comparative heatmap
 sampleDists <- dist(t(assay(vsd)))
 sampleDistMatrixB <- as.matrix(sampleDists)
-pheatmap(sampleDistMatrixB, clustering_distance_rows = sampleDists, clustering_distance_cols = sampleDists, col = colors)
+pheatmap(sampleDistMatrixB, clustering_distance_rows = sampleDists, clustering_distance_cols = sampleDists, col = mycolors)
 
 #Comparative heatmap
 library("genefilter")
