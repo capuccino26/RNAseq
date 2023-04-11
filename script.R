@@ -110,6 +110,9 @@ as.dendrogram(my_hclust_gene) %>% plot(horiz = TRUE)
 pdf("/DENDO.pdf")
 par(mar=c(5,4,4,15)+1)
 #'bottom', 'left', 'top', 'right'.
+#set labels with title for any plot:
+title(ylab="Test", line=0, cex.lab=1.5, family="Calibri Light")
+#ylab,xlab,line, etc
 as.dendrogram(my_hclust_gene) %>% plot(horiz = TRUE)
 dev.off()
 ##Outliers counting
