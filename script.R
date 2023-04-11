@@ -176,11 +176,22 @@ p3 <- p2 + scale_color_manual(values=mycolors)
 dataraw<-read.csv2("/GSE60450_LactationGenewiseCounts.csv")
 data$datalabel <- NA
 data$datalabel[data$diffexpressed != "NO"] <- dataraw$EntrezGeneID[data$diffexpressed != "NO"]
+#####Alternativaly, if the table already have the ID as index
+data$datalabel <- NA
+data$datalabel[data$diffexpressed != "NO"] <- rownames(data)[data$diffexpressed != "NO"]
+
+####Plot unorganized
 ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, label=datalabel)) + geom_point() + theme_minimal() + geom_text()
 ####Organize the labels using the "ggrepel" package and the geom_text_repel() function
 library(ggrepel)
 ####Plot adding up all layers we have seen so far
 ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, label=datalabel)) + geom_point() + theme_minimal() + geom_text_repel() + scale_color_manual(values=c("blue", "black", "red")) + geom_vline(xintercept=c(-0.6, 0.6), col="red") + geom_hline(yintercept=-log10(0.05), col="red")
+#####In some cases the labels might be removed due to too many overlaps, the option "geom_text_repel()" must be refined
+geom_text_repel(max.overlaps = 50)
+geom_label_repel(max.overlaps = 50)
+
+####In GGPLOT the margins can be adjusted
+p + theme(plot.margin = unit(c(1, 0, 1, 0), "cm"))
 
 #Simple comparative heatmap
 sampleDists <- dist(t(assay(vsd)))
