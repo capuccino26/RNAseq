@@ -106,6 +106,12 @@ data_subset <- as.matrix(data[rowSums(data)>1000000,])
 ###library(dendextend)
 my_hclust_gene <- hclust(dist(data_subset), method = "complete")
 as.dendrogram(my_hclust_gene) %>% plot(horiz = TRUE)
+###R might cut the labels out, in this case you have to change the margin on the output:
+pdf("/DENDO.pdf")
+par(mar=c(5,4,4,15)+1)
+#'bottom', 'left', 'top', 'right'.
+as.dendrogram(my_hclust_gene) %>% plot(horiz = TRUE)
+dev.off()
 ##Outliers counting
 W <- res$stat
 maxCooks <- apply(assays(dds)[["cooks"]],1,max)
