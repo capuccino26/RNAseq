@@ -24,6 +24,8 @@ coldata<-merge(coldata,SP80_3280_3,by="X.rname")
 coldata<-merge(coldata,SP80_3280_4,by="X.rname")
 rownames(coldata) <- coldata$X.rname
 coldata<-subset(coldata,select=-c(X.rname))
+##If the table contains the "Chr" rows you can remove:
+coldata <- coldata[-(1:80),]
 
 #Settings for DESeq2
 sampleinfo <- read.table(file.path("/starAligned/SampleInfo.txt"), header=TRUE)
