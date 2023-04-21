@@ -191,6 +191,9 @@ ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, lab
 #####In some cases the labels might be removed due to too many overlaps, the option "geom_text_repel()" must be refined
 geom_text_repel(max.overlaps = 50)
 geom_label_repel(max.overlaps = 50)
+#####Also try using xlim() and ylim() to increase the size of the plotting area so all of the labels fit comfortably.
+#####Alternative options for the text_repel:
+ggplot(data=data, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, label=datalabel)) + geom_point() + theme_minimal() + geom_text_repel(max.overlaps = 150, box.padding = 0.4, direction='x', hjust = 0.5,angle=90, force=0.5,xlim=c(-Inf,40),ylim=c(-Inf,Inf)) + scale_color_manual(values=c("blue", "black", "red")) + geom_vline(xintercept=c(-0.6, 0.6), col="red") + geom_hline(yintercept=-log10(0.05), col="red")+ xlim(-30, 30) + ylim(-20,200) + coord_cartesian(clip = "off")
 
 ####In GGPLOT the margins can be adjusted
 p + theme(plot.margin = unit(c(1, 0, 1, 0), "cm"))
