@@ -53,6 +53,7 @@ res <- results(dds)
 
 #Exporting Results
 write.table(as.data.frame(res), file="/starAligned/treated/RES_deseq.csv")
+write.csv2(as.data.frame(res), file="/starAligned/treated/RES_deseq.csv")
 #print(res)
 
 #Normalization
